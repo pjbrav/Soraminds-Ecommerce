@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Menu versions — {{ tenant.restaurant_name }}{% endblock %}
+{% block nav %}<a href="/" class="hover:text-neutral-900">Upload</a>{% endblock %}
+{% block content %}
+<div class="max-w-4xl">
+  <h1 class="text-2xl font-extrabold mb-4">Menu versions</h1>
+  <div class="bg-white rounded-2xl border border-neutral-200 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-neutral-50 text-neutral-500 text-xs uppercase">
+        <tr><th class="text-left px-4 py-2">Version</th><th class="text-left px-4 py-2">Published</th><th class="text-left px-4 py-2">By</th><th class="text-left px-4 py-2">Status</th><th class="px-4 py-2"></th></tr>
+      </thead>
+      <tbody>
+        {% for v in versions %}
+        <tr class="border-t border-neutral-100">
+          <td class="px-4 py-2.5 font-mono font-semibold">menu-v{{ v.version_no }}</td>
+          <td class="px-4 py-2.5 text-neutral-500">{{ v.created_at }}</td>
+          <td class="px-4 py-2.5">{{ v.published_by }}</td>
+          <td class="px-4 py-2.5">{{ '<span class="rounded-full bg-green-100 text-green-800 text-xs font-bold px-2 py-0.5">ACTIVE</span>'|safe if v.is_active else '<span class="text-neutral-400 text-xs">inactive</span>'|safe }}</td>
+          <td class="px-4 py-2.5 text-right">
+            {% if not v.is_active %}
+            <button class="rollback-btn rounded-lg border border-neutral-300 px-2.5 py-1 text-xs font-semibold hover:border-[#eb1700] hover:text-[#eb1700]"
+                    data-tenant="{{ tenant.tenant_id }}" data-version="{{ v.version_no }}">Roll back to this</button>
+            {% endif %}
+            <a class="text-xs text-neutral-400 hover:text-neutral-700" href="/tenants/{{ tenant.tenant_id }}/menu/menu-v{{ v.version_no }}/doc" title="JSON document (API: GET /active reflects the active one)">raw</a>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="px-4 py-6 text-neutral-400 text-center">Nothing published yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  {% if jobs %}
+  <h2 class="font-extrabold text-lg mt-8 mb-2">Downstream jobs (latest)</h2>
+  <div class="bg-white rounded-2xl border border-neutral-200 p-4 text-xs font-mono space-y-1">
+    {% for j in jobs %}<div>[{{ j.created_at }}] {{ j.job_type }} — <span class="{{ 'text-green-700' if j.status == 'done' else 'text-neutral-500' }}">{{ j.status }}</span> · {{ j.detail }}</div>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if audit_log %}
+  <h2 class="font-extrabold text-lg mt-8 mb-2">Audit log</h2>
+  <div class="bg-white rounded-2xl border border-neutral-200 p-4 text-xs space-y-1 max-h-80 overflow-auto">
+    {% for a in audit_log %}<div class="text-neutral-600"><span class="text-neutral-400">{{ a.created_at }}</span> <span class="font-semibold">{{ a.actor }}</span> · {{ a.action }}</div>{% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

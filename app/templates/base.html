@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}SpiceHub Menu Manager{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body class="bg-neutral-100 min-h-screen text-neutral-900">
+  <header class="bg-white border-b border-neutral-200 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2 font-extrabold text-lg tracking-tight">
+        <span class="w-8 h-8 rounded-lg bg-[#eb1700] text-white grid place-items-center">🌶</span>
+        <span>SpiceHub <span class="text-[#eb1700]">Menu Manager</span></span>
+      </a>
+      <nav class="flex items-center gap-4 text-sm font-semibold text-neutral-600">
+        {% block nav %}{% endblock %}
+      </nav>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-4 py-6">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="max-w-7xl mx-auto px-4 py-8 text-xs text-neutral-400">
+    Menu Ingestion prototype — SoraMinds technical assignment. Owner-resolvable by design: no engineer required.
+  </footer>
+</body>
+</html>

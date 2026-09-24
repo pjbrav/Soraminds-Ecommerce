@@ -1,0 +1,18 @@
+/* Small helpers on top of Tailwind: image placeholders, line clamping. */
+.noimg {
+  background-image: radial-gradient(circle at 30% 30%, #e5e5e5 25%, transparent 26%),
+    radial-gradient(circle at 70% 70%, #e5e5e5 22%, transparent 23%);
+  background-color: #f5f5f5;
+}
+.noimg img {
+  display: none;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.row-card img {
+  background: #f5f5f5;
+}

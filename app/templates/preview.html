@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ menu.tenant.restaurant_name }} — kiosk menu{% endblock %}
+{% block nav %}
+<a href="/" class="hover:text-neutral-900">Upload</a>
+{% if mode == 'preview' %}
+<a href="#" onclick="history.back()" class="hover:text-neutral-900">Back to report</a>
+{% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="max-w-5xl mx-auto">
+  <div class="flex items-baseline gap-3 mb-1">
+    <h1 class="text-3xl font-extrabold">{{ menu.tenant.restaurant_name }}</h1>
+    <span class="text-sm text-neutral-500">{{ menu.tenant.city }}</span>
+    {% if mode == 'preview' %}
+    <span class="text-xs font-bold rounded-full bg-blue-100 text-blue-800 px-2 py-0.5">PREVIEW — not live</span>
+    {% else %}
+    <span class="text-xs font-bold rounded-full bg-green-100 text-green-800 px-2 py-0.5">LIVE · menu-v{{ version }}</span>
+    {% endif %}
+  </div>
+  <p class="text-neutral-500 text-sm mb-5">Rendered from the same structured JSON that publishing produces.</p>
+
+  {% if menu.featured %}
+  <h2 class="font-extrabold text-lg mb-2">Featured Items</h2>
+  <div class="flex gap-4 overflow-x-auto pb-3 mb-6 -mx-1 px-1">
+    {% for item in menu.featured %}
+    <div class="min-w-[210px] max-w-[210px] bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm">
+      <div class="h-28 bg-neutral-100"><img class="w-full h-full object-cover" loading="lazy" src="{{ item.image_url }}" onerror="this.parentElement.classList.add('noimg')"></div>
+      <div class="p-3">
+        <div class="font-bold text-sm leading-tight">{{ item.item_name }}</div>
+        <div class="text-[#eb1700] font-extrabold mt-1">${{ '%.2f'|format(item.price or 0) }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <nav class="flex gap-2 overflow-x-auto sticky top-14 bg-neutral-100 py-2 z-30 -mx-1 px-1">
+    {% for cat in menu.categories %}
+    <a href="#cat-{{ loop.index }}" class="whitespace-nowrap rounded-full bg-white border border-neutral-300 px-3.5 py-1.5 text-sm font-semibold hover:border-[#eb1700] hover:text-[#eb1700]">{{ cat.name }}</a>
+    {% endfor %}
+  </nav>
+
+  {% for cat in menu.categories %}
+  <section id="cat-{{ loop.index }}" class="mt-6 scroll-mt-28">
+    <h2 class="font-extrabold text-lg border-b-2 border-[#eb1700] inline-block pr-4 mb-3">{{ cat.name }}</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {% for item in cat["items"] %}
+      <div class="bg-white rounded-2xl border border-neutral-200 overflow-hidden shadow-sm flex {{ 'opacity-50' if not item.is_available }}">
+        <div class="w-28 h-full min-h-[112px] bg-neutral-100 shrink-0"><img class="w-full h-full object-cover" loading="lazy" src="{{ item.image_url }}" onerror="this.parentElement.classList.add('noimg')"></div>
+        <div class="p-3 flex-1">
+          <div class="flex items-start justify-between gap-2">
+            <div class="font-bold text-sm leading-tight">{{ item.item_name }}</div>
+            <div class="text-[#eb1700] font-extrabold text-sm whitespace-nowrap">${{ '%.2f'|format(item.price or 0) }}</div>
+          </div>
+          <p class="text-xs text-neutral-500 mt-1 line-clamp-3">{{ item.description }}</p>
+          <div class="flex flex-wrap gap-1 mt-2">
+            {% if item.dietary_type in ('Veg', 'Vegan') %}
+            <span class="text-[10px] font-bold rounded px-1.5 py-0.5 bg-green-100 text-green-800">{{ item.dietary_type }}</span>
+            {% elif item.dietary_type == 'Egg' %}
+            <span class="text-[10px] font-bold rounded px-1.5 py-0.5 bg-yellow-100 text-yellow-800">Egg</span>
+            {% elif item.dietary_type == 'Non-Veg' %}
+            <span class="text-[10px] font-bold rounded px-1.5 py-0.5 bg-red-100 text-red-800">Non-Veg</span>
+            {% endif %}
+            {% if item.spice_level and item.spice_level != 'None' %}
+            <span class="text-[10px] font-bold rounded px-1.5 py-0.5 bg-orange-100 text-orange-800">🌶 {{ item.spice_level }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+  {% if mode == 'preview' %}
+  <div class="mt-8 bg-white rounded-2xl border-2 border-[#eb1700] p-5 text-center">
+    <div class="font-bold">Happy with the preview?</div>
+    <button id="publish-btn-page" class="mt-2 bg-[#eb1700] text-white font-bold rounded-xl px-6 py-2.5 hover:bg-[#c91300]">Publish menu</button>
+    <p class="text-xs text-neutral-500 mt-2">Publishing creates a new immutable version and switches the kiosk to it instantly.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

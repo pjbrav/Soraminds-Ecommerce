@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Kiosk — {{ tenant.restaurant_name }}{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto bg-white rounded-2xl border border-neutral-200 p-8 text-center">
+  <div class="text-4xl mb-3">🍽</div>
+  <h1 class="text-xl font-extrabold">No live menu yet</h1>
+  <p class="text-neutral-500 text-sm mt-2">Upload a menu, fix any issues, and hit Publish — the kiosk view appears here.</p>
+  <a href="/" class="inline-block mt-4 bg-[#eb1700] text-white font-bold rounded-xl px-5 py-2.5 text-sm">Go to upload</a>
+</div>
+{% endblock %}

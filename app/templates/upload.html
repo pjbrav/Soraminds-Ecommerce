@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Upload your menu — SpiceHub Menu Manager{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+  <div class="bg-white rounded-2xl shadow-sm border border-neutral-200 p-8">
+    <h1 class="text-2xl font-extrabold mb-1">Upload your menu</h1>
+    <p class="text-neutral-500 mb-6 text-sm">Spreadsheet + photos. We'll check everything and show you exactly what needs a fix — nothing goes live until you publish.</p>
+
+    <div id="upload-alert" class="hidden mb-4 rounded-xl px-4 py-3 text-sm"></div>
+
+    <div class="space-y-5">
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="tenant">Restaurant</label>
+        <select id="tenant" class="w-full border border-neutral-300 rounded-xl px-3 py-2.5 bg-white">
+          {% for t in tenants %}
+          <option value="{{ t }}" {% if t == default_tenant %}selected{% endif %}>{{ t }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="file">Menu spreadsheet (.xlsx or .csv)</label>
+        <input id="file" type="file" accept=".xlsx,.csv"
+               class="w-full border border-neutral-300 rounded-xl px-3 py-2.5 file:mr-3 file:rounded-lg file:border-0 file:bg-[#eb1700] file:text-white file:px-3 file:py-1.5">
+        <p class="text-xs text-neutral-400 mt-1">Max 5 MB, max 500 items. Use the upload template if you have one.</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" for="photos">Item photos (individual files, or one .zip)</label>
+        <input id="photos" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.zip"
+               class="w-full border border-neutral-300 rounded-xl px-3 py-2.5 file:mr-3 file:rounded-lg file:border-0 file:bg-neutral-800 file:text-white file:px-3 file:py-1.5">
+        <p class="text-xs text-neutral-400 mt-1">File names must match the <code>image_filename</code> column (case doesn't matter).</p>
+      </div>
+
+      <button id="upload-btn"
+              class="w-full bg-[#eb1700] hover:bg-[#c91300] text-white font-bold rounded-xl py-3 disabled:opacity-50">
+        Process my menu
+      </button>
+      <p id="upload-status" class="text-sm text-neutral-500 text-center hidden">Checking your menu…</p>
+    </div>
+  </div>
+
+  <div class="mt-6 grid sm:grid-cols-2 gap-4">
+    <a id="kiosk-link" href="#" class="hidden bg-white rounded-2xl border border-neutral-200 p-4 text-sm font-semibold hover:border-[#eb1700]">🖥 View the live kiosk menu →</a>
+    <a id="versions-link" href="#" class="hidden bg-white rounded-2xl border border-neutral-200 p-4 text-sm font-semibold hover:border-[#eb1700]">🗂 Menu versions & rollback →</a>
+  </div>
+</div>
+{% endblock %}

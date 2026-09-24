@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}Validation report — {{ report.filename }}{% endblock %}
+{% block nav %}
+<a href="/" class="hover:text-neutral-900">← New upload</a>
+{% endblock %}
+{% block content %}
+
+{% if request.query_params.get('blocked') %}
+<div class="mb-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 px-4 py-3 text-sm">
+  Preview is locked until every <strong>Error</strong> row below is fixed. Warnings never block.
+</div>
+{% endif %}
+
+<div class="flex flex-wrap items-center gap-3 mb-4">
+  <h1 class="text-2xl font-extrabold">Validation report</h1>
+  <span class="text-sm text-neutral-500">{{ report.filename }} · {{ report.total_rows if report.total_rows else report.rows|length }} items</span>
+</div>
+
+<!-- summary badges -->
+<div class="flex flex-wrap gap-2 mb-4 text-sm font-semibold">
+  <span class="rounded-full px-3 py-1 bg-neutral-200">{{ report.counts.valid }} valid</span>
+  <span class="rounded-full px-3 py-1 bg-amber-100 text-amber-800">{{ report.counts.warning }} warnings</span>
+  <span class="rounded-full px-3 py-1 bg-red-100 text-red-800">{{ report.counts.error }} errors</span>
+  <span id="hard-count" class="rounded-full px-3 py-1 {{ 'bg-green-100 text-green-800' if report.publishable else 'bg-red-600 text-white' }}">
+    {{ report.hard_errors }} blocking issue{{ 's' if report.hard_errors != 1 }}
+  </span>
+</div>
+
+<!-- upload-level issues (unmapped columns, too many featured, orphan photos) -->
+{% for issue in report.upload_issues %}
+<div class="mb-3 rounded-xl border px-4 py-3 text-sm
+     {{ 'border-red-300 bg-red-50' if issue.severity == 'hard' else 'border-amber-300 bg-amber-50' if issue.severity in ('soft','warning') else 'border-neutral-300 bg-neutral-50' }}">
+  <div class="font-semibold">{{ issue.message }}</div>
+  {% if issue.suggestion %}<div class="text-neutral-600 mt-1">{{ issue.suggestion }}</div>{% endif %}
+  {% if issue.code == 'photo_unmatched' %}
+  <div class="mt-2 flex items-center gap-2">
+    <img src="/media/tenants/{{ report.tenant_id }}/uploads/{{ report.upload_id }}/images/{{ issue.extra.filename }}" class="w-16 h-16 object-cover rounded-lg border" alt="">
+    <select class="photo-assign border rounded-lg px-2 py-1 text-xs" data-filename="{{ issue.extra.filename }}">
+      <option value="">Assign this photo to…</option>
+      {% for row in report.rows %}<option value="{{ row.row_index }}">Row {{ row.row_index }} — {{ row.fields.item_name }}</option>{% endfor %}
+    </select>
+  </div>
+  {% endif %}
+</div>
+{% endfor %}
+
+{% if report.mapping and report.mapping.auto_mapped %}
+<div class="mb-3 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm">
+  <span class="font-semibold">Column names auto-mapped:</span>
+  {% for m in report.mapping.auto_mapped %}<code class="mx-1 bg-white rounded px-1">{{ m.header }}</code>→<code class="mx-1 bg-white rounded px-1">{{ m.column }}</code> ({{ m.similarity }}){% endfor %}
+</div>
+{% endif %}
+
+<!-- action bar -->
+<div class="flex flex-wrap gap-3 mb-4">
+  <a id="preview-btn" href="/tenants/{{ report.tenant_id }}/uploads/{{ report.upload_id }}/preview"
+     class="rounded-xl px-4 py-2.5 font-bold text-sm {{ 'bg-neutral-200 text-neutral-400 pointer-events-none' if not report.publishable else 'bg-white border-2 border-[#eb1700] text-[#eb1700] hover:bg-[#eb1700] hover:text-white' }}">
+     ▶ Live preview (kiosk view)</a>
+  <button id="publish-btn" data-upload="{{ report.upload_id }}" data-tenant="{{ report.tenant_id }}"
+     class="rounded-xl px-4 py-2.5 font-bold text-sm bg-[#eb1700] text-white hover:bg-[#c91300] disabled:opacity-40" {{ '' if report.publishable else 'disabled' }}>
+     Publish menu</a>
+  </button>
+  <label class="rounded-xl px-4 py-2.5 font-bold text-sm bg-white border border-neutral-300 cursor-pointer hover:border-neutral-500">
+    ⬆ Partial re-upload (merge by item_id)
+    <input id="partial-file" type="file" accept=".xlsx,.csv" class="hidden">
+  </label>
+</div>
+
+<!-- rows -->
+<div class="space-y-3">
+{% for row in report.rows %}
+<div class="row-card bg-white rounded-2xl border {{ 'border-red-300' if row.status == 'error' else 'border-amber-300' if row.status == 'warning' else 'border-neutral-200' }} shadow-sm"
+     data-row="{{ row.row_index }}">
+  <div class="flex items-center gap-3 px-4 py-2 border-b border-neutral-100 text-sm">
+    <span class="row-badge rounded-full px-2.5 py-0.5 text-xs font-bold
+      {{ 'bg-green-100 text-green-800' if row.status == 'valid' else 'bg-amber-100 text-amber-800' if row.status == 'warning' else 'bg-red-100 text-red-800' }}">
+      {{ '✓ Valid' if row.status == 'valid' else '⚠ Warning' if row.status == 'warning' else '✗ Error' }}</span>
+    <span class="text-neutral-400">row {{ row.row_index }}</span>
+    <span class="font-mono text-xs text-neutral-400">{{ row.item_id }}</span>
+    <span class="ml-auto text-xs text-neutral-400">{{ row.fields.repairs|length }} auto-fix{{ 'es' if row.fields.repairs|length != 1 }}</span>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-3 px-4 py-3 text-sm">
+    <!-- left column: identity fields -->
+    <div class="space-y-2">
+      <div class="flex gap-2">
+        <div class="flex-1"><label class="text-xs text-neutral-500">Item name</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="item_name" value="{{ row.fields.item_name or '' }}"></div>
+        <div class="w-28"><label class="text-xs text-neutral-500">Price</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="price" value="{{ row.fields.price if row.fields.price is not none else '' }}"></div>
+      </div>
+      <div class="flex gap-2">
+        <div class="flex-1"><label class="text-xs text-neutral-500">Category</label>
+          <select class="w-full border rounded-lg px-2 py-1.5 edit-input bg-white" data-field="category">
+            <option value=""></option>
+            {% for c in categories %}<option value="{{ c }}" {{ 'selected' if row.fields.category == c }}>{{ c }}</option>{% endfor %}
+          </select></div>
+        <div class="w-36"><label class="text-xs text-neutral-500">Dietary</label>
+          <select class="w-full border rounded-lg px-2 py-1.5 edit-input bg-white" data-field="dietary_type">
+            <option value=""></option>
+            {% for d in dietary_types %}<option value="{{ d }}" {{ 'selected' if row.fields.dietary_type == d }}>{{ d }}</option>{% endfor %}
+          </select></div>
+      </div>
+      <div class="flex gap-2">
+        <div class="w-36"><label class="text-xs text-neutral-500">Spice level</label>
+          <select class="w-full border rounded-lg px-2 py-1.5 edit-input bg-white" data-field="spice_level">
+            {% for s in spice_levels %}<option value="{{ s }}" {{ 'selected' if row.fields.spice_level == s }}>{{ s }}</option>{% endfor %}
+          </select></div>
+        <div class="w-32"><label class="text-xs text-neutral-500">Calories</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="calorie_range" value="{{ row.fields.calorie_range or '' }}"></div>
+        <div class="flex-1"><label class="text-xs text-neutral-500">Photo file</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input font-mono text-xs" data-field="image_filename" value="{{ row.fields.image_filename or '' }}"></div>
+      </div>
+    </div>
+    <!-- right column: description + flags -->
+    <div class="space-y-2">
+      <div>
+        <label class="text-xs text-neutral-500">Description
+          {% if row.fields.description_auto_generated %}<span class="text-purple-700 font-semibold">(auto-generated — please review)</span>{% endif %}
+        </label>
+        <textarea class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="description" rows="2">{{ row.fields.description or '' }}</textarea>
+      </div>
+      <div class="flex gap-2 items-end">
+        <div class="flex-1"><label class="text-xs text-neutral-500">Allergens</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="allergens" value="{{ row.fields.allergens|join(', ') }}"></div>
+        <div class="flex-1"><label class="text-xs text-neutral-500">Tags</label>
+          <input class="w-full border rounded-lg px-2 py-1.5 edit-input" data-field="tags" value="{{ row.fields.tags|join(', ') }}"></div>
+        <label class="flex items-center gap-1.5 text-xs font-semibold pb-2"><input type="checkbox" class="edit-check" data-field="is_featured" {{ 'checked' if row.fields.is_featured }}>Featured</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- issues + photo -->
+  {% if row.issues %}
+  <div class="px-4 pb-3 space-y-2">
+    {% for issue in row.issues %}
+    <div class="rounded-lg px-3 py-2 text-sm {{ 'bg-red-50 border border-red-200' if issue.severity == 'hard' else 'bg-amber-50 border border-amber-200' if issue.severity in ('soft','warning') else 'bg-neutral-50 border border-neutral-200' }}">
+      <div class="font-semibold">{{ issue.message }}</div>
+      {% if issue.suggestion %}<div class="text-neutral-600">{{ issue.suggestion }}</div>{% endif %}
+      {% if issue.code == 'photo_conflict' %}
+      <div class="mt-2 flex flex-wrap gap-2">
+        <button class="conflict-btn rounded-lg bg-white border border-red-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-price="{{ issue.extra.photo_price }}">Use photo price (${{ '%.2f'|format(issue.extra.photo_price) }})</button>
+        <button class="conflict-btn rounded-lg bg-white border border-neutral-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-price="{{ issue.extra.sheet_price }}">Keep spreadsheet price (${{ '%.2f'|format(issue.extra.sheet_price) }})</button>
+      </div>
+      {% endif %}
+      {% if issue.code in ('category_ambiguous', 'category', 'unknown_category') %}
+      <div class="mt-2 flex flex-wrap gap-1.5">
+        {% for opt in issue.extra.options if issue.extra and issue.extra.options %}
+        <button class="cat-fix rounded-lg bg-white border border-neutral-300 px-2.5 py-1 text-xs font-semibold" data-row="{{ row.row_index }}" data-category="{{ opt }}">{{ opt }}</button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="flex items-center gap-3 px-4 pb-3">
+    <img class="w-14 h-14 rounded-lg border object-cover bg-neutral-100" loading="lazy"
+         src="/media/tenants/{{ report.tenant_id }}/uploads/{{ report.upload_id }}/images/{{ (row.fields.image_filename or 'x') }}"
+         onerror="this.style.visibility='hidden'">
+    <button class="row-save rounded-xl bg-neutral-900 text-white text-xs font-bold px-3 py-2"
+            data-row="{{ row.row_index }}" data-tenant="{{ report.tenant_id }}" data-upload="{{ report.upload_id }}">Save changes</button>
+    <span class="row-saved text-xs text-green-700 hidden">Saved ✓</span>
+    {% if row.fields.repairs %}
+    <details class="ml-auto text-xs text-neutral-400">
+      <summary class="cursor-pointer">auto-fixes applied</summary>
+      <ul class="mt-1 list-disc list-inside">{% for r in row.fields.repairs %}<li>{{ r }}</li>{% endfor %}</ul>
+    </details>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
