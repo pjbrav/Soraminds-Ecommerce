@@ -20,7 +20,8 @@ this README explains how to run the implementation).
 
 ```bash
 # 1. Install (Python 3.11+)
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv && source .venv/bin/activate  <--Linux
+python -m venv .venv; .\.venv\Scripts\Activate.ps1 <-Windows
 pip install -r requirements.txt
 
 # 2. Generate the demo data (messy + clean menus, 29 synthetic photos, zips)
