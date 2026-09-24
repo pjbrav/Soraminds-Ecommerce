@@ -1,0 +1,20 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+jinja2>=3.1
+pyyaml>=6.0
+pydantic>=2.7
+openpyxl>=3.1
+pillow>=10.3
+pandas>=2.2
+httpx>=0.27
+rapidfuzz>=3.9
+pytest>=8.2
+
+# Local embeddings (recommended: free, deterministic, spec-matched 0.85 threshold).
+# The app degrades to a built-in deterministic fallback if unavailable.
+sentence-transformers>=3.0
+
+# Optional: local OCR for photo-vs-spreadsheet conflict detection without an
+# OpenAI key. Without it (and without a key) the vision pass is skipped with a note.
+# rapidocr-onnxruntime>=1.3

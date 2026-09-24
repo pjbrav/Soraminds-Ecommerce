@@ -1,0 +1,17 @@
+# runtime state (never commit)
+data/
+storage/
+demo/_run/
+
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# os
+.DS_Store

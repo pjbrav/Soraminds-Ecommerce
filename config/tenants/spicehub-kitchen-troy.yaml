@@ -1,0 +1,53 @@
+# Tenant-scoped configuration for the Menu Ingestion block.
+#
+# The category list and the allergen list are CONFIG VALUES, not hardcoded
+# constants in the pipeline: a different cuisine (e.g. a burger restaurant)
+# ships a different YAML file and the pipeline needs no code change.
+tenant_id: spicehub-kitchen-troy
+restaurant_name: SpiceHub Kitchen
+city: Troy, MI
+cuisine: South Indian / Indo-Chinese
+currency: USD
+
+# SpiceHub's real 10-category structure (their live ordering pages).
+categories:
+  - Veg Appetizers
+  - Non Veg Appetizers
+  - Veg Curries
+  - Non Veg Curries
+  - Rice
+  - Hyderabadi Dum Biryani
+  - Breads
+  - Desserts
+  - Drinks
+  - Soups
+
+dietary_types: [Veg, Non-Veg, Egg, Vegan]
+spice_levels: [None, Mild, Medium, Hot, Extra Hot]
+
+# Known allergen list (tenant-configurable).
+allergens:
+  - Gluten
+  - Dairy
+  - Soy
+  - Egg
+  - Nuts
+  - Peanuts
+  - Sesame
+  - Shellfish
+  - Fish
+  - Mustard
+
+limits:
+  max_menu_file_mb: 5      # hard limit on the spreadsheet upload
+  max_rows: 500            # comfortably above SpiceHub's real ~90-item menu
+  max_image_mb: 8          # per photo
+  max_images_total_mb: 200 # whole upload
+
+thresholds:
+  fuzzy_match: 0.85          # spec: auto-map only at >= 0.85 cosine similarity
+  ambiguity_gap: 0.05       # two candidates this close together => ask the owner
+  duplicate_similarity: 0.95
+  featured_warn_count: 10   # more featured items than this => warning
+
+embedding_model: all-MiniLM-L6-v2
