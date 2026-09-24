@@ -2,7 +2,7 @@
   "tenant_id": "spicehub-kitchen-troy",
   "restaurant_name": "SpiceHub Kitchen",
   "version": 1,
-  "published_at": "2026-09-24T02:09:50Z",
+  "published_at": "2026-09-24T02:16:10Z",
   "published_by": "owner",
   "item_count": 28,
   "items": [
@@ -50,8 +50,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:48Z",
-      "updated_at": "2026-09-24T02:09:48Z"
+      "created_at": "2026-09-24T02:16:07Z",
+      "updated_at": "2026-09-24T02:16:07Z"
     },
     {
       "item_id": "MENU-0002",
@@ -98,8 +98,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:48Z",
-      "updated_at": "2026-09-24T02:09:48Z"
+      "created_at": "2026-09-24T02:16:07Z",
+      "updated_at": "2026-09-24T02:16:07Z"
     },
     {
       "item_id": "MENU-0003",
@@ -146,8 +146,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:48Z",
-      "updated_at": "2026-09-24T02:09:48Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0004",
@@ -192,8 +192,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:48Z",
-      "updated_at": "2026-09-24T02:09:48Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0005",
@@ -238,8 +238,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:48Z",
-      "updated_at": "2026-09-24T02:09:48Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0006",
@@ -286,8 +286,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0007",
@@ -333,8 +333,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0008",
@@ -380,8 +380,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0009",
@@ -428,8 +428,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0010",
@@ -475,8 +475,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0011",
@@ -521,8 +521,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0012",
@@ -566,8 +566,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:08Z",
+      "updated_at": "2026-09-24T02:16:08Z"
     },
     {
       "item_id": "MENU-0013",
@@ -612,8 +612,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0014",
@@ -658,8 +658,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0015",
@@ -705,8 +705,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0016",
@@ -752,8 +752,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:49Z",
-      "updated_at": "2026-09-24T02:09:49Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0017",
@@ -799,8 +799,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0018",
@@ -846,8 +846,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0019",
@@ -892,8 +892,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0020",
@@ -938,8 +938,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0021",
@@ -985,8 +985,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0022",
@@ -1031,8 +1031,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:09Z",
+      "updated_at": "2026-09-24T02:16:09Z"
     },
     {
       "item_id": "MENU-0023",
@@ -1079,8 +1079,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     },
     {
       "item_id": "MENU-0024",
@@ -1127,8 +1127,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     },
     {
       "item_id": "MENU-0025",
@@ -1174,8 +1174,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     },
     {
       "item_id": "MENU-0026",
@@ -1219,8 +1219,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     },
     {
       "item_id": "MENU-0027",
@@ -1264,8 +1264,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     },
     {
       "item_id": "MENU-0028",
@@ -1310,8 +1310,8 @@
         "review_count": 0
       },
       "menu_version": 1,
-      "created_at": "2026-09-24T02:09:50Z",
-      "updated_at": "2026-09-24T02:09:50Z"
+      "created_at": "2026-09-24T02:16:10Z",
+      "updated_at": "2026-09-24T02:16:10Z"
     }
   ]
 }

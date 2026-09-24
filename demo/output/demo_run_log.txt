@@ -1,7 +1,7 @@
 ========================================================================
 PATH 1 — messy menu (owner-resolvable issues end to end)
 ========================================================================
-uploaded messy_menu.xlsx -> uploadId 3443f0b9d679 | 28 items | 5 errors, 2 warnings, 21 valid | vision: rapidocr
+uploaded messy_menu.xlsx -> uploadId 46acdcda22d9 | 28 items | 5 errors, 2 warnings, 21 valid | vision: rapidocr
   counts: {'valid': 21, 'warning': 2, 'error': 5} | hard errors: 5 | publishable: False
   [upload] warning: 12 items are marked featured (more than 10).
   [upload] soft: Photo 'chef_special.jpg' is not referenced by any menu item.
@@ -43,7 +43,7 @@ uploaded messy_menu.xlsx -> uploadId 3443f0b9d679 | 28 items | 5 errors, 2 warni
 ========================================================================
 PATH 2 — clean menu (happy path, direct publish)
 ========================================================================
-uploaded clean_menu.xlsx -> uploadId a8dbb99b2696 | 27 items | 0 errors, 0 warnings, 27 valid | vision: rapidocr
+uploaded clean_menu.xlsx -> uploadId 2f2cdb760e66 | 27 items | 0 errors, 0 warnings, 27 valid | vision: rapidocr
   counts: {'valid': 27, 'warning': 0, 'error': 0} | hard errors: 0 | publishable: True
   row  1   VALID Samosa (2)
   row  2   VALID Gobi Manchurian
