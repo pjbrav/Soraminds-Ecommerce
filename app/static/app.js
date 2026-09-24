@@ -18,6 +18,26 @@ async function api(method, url, body) {
   return data;
 }
 
+/* Tenant + upload id for the current page. Derived from the URL path
+   (/tenants/{t}/uploads/{u}/report|preview) so every button on the page —
+   including quick-fix buttons that only carry data-row — shares it. */
+function pageCtx() {
+  const parts = location.pathname.split("/").filter(Boolean); // [tenants, t, uploads, u, page]
+  if (parts[0] === "tenants" && parts[2] === "uploads") {
+    return { tenant: parts[1], upload: parts[3] };
+  }
+  const btn = $("#publish-btn");
+  if (btn && btn.dataset.tenant) {
+    return { tenant: btn.dataset.tenant, upload: btn.dataset.upload };
+  }
+  return { tenant: null, upload: null };
+}
+
+function patchRow(row, changes) {
+  const { tenant, upload } = pageCtx();
+  return api("PATCH", `/tenants/${tenant}/menu/uploads/${upload}/items/${row}`, { changes });
+}
+
 /* ----------------------------- Upload page ----------------------------- */
 const uploadBtn = $("#upload-btn");
 if (uploadBtn) {
@@ -76,90 +96,168 @@ function showAlert(box, message, kind) {
 }
 
 /* -------------------------- Validation report -------------------------- */
-const reportBody = $$("body").some ? document.body : document;
 if ($(".row-save")) {
-  // Inline single-row edit -> PATCH -> refresh row badge in place.
+  // Remember each control's initial value so we only send real edits.
+  // (Selects have no `defaultValue` like text inputs do — this covers them.)
+  $$(".edit-input").forEach((input) => {
+    input.dataset.initial = input.value;
+  });
+
+  // Inline single-row edit -> PATCH -> update the row badge in place.
   $$(".row-save").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const card = btn.closest(".row-card");
-      const { row, tenant, upload } = btn.dataset;
+      const { row } = btn.dataset;
       const changes = {};
       $$(".edit-input", card).forEach((input) => {
-        const field = input.dataset.field;
-        if (input.value !== (input.defaultValue ?? input.value)) changes[field] = input.value;
+        if (input.value !== input.dataset.initial) changes[input.dataset.field] = input.value;
       });
       $$(".edit-check", card).forEach((chk) => {
         changes[chk.dataset.field] = chk.checked ? "Yes" : "No";
       });
       if (!Object.keys(changes).length) {
-        showAlertInline(card, "No changes to save.");
+        showAlertInline("No changes to save.");
         return;
       }
       btn.disabled = true;
       try {
-        const result = await api(
-          "PATCH",
-          `/tenants/${tenant}/menu/uploads/${upload}/items/${row}`,
-          { changes }
-        );
-        updateRowCard(card, result);
-        updateSummary(result.report);
+        const result = await patchRow(row, changes);
+        // Remember the saved values so the next Save only sends new edits.
+        $$(".edit-input", card).forEach((input) => {
+          input.dataset.initial = input.value;
+        });
         const saved = $(".row-saved", card);
         saved.classList.remove("hidden");
         setTimeout(() => saved.classList.add("hidden"), 2500);
+        afterRowUpdate(card, result);
       } catch (err) {
-        showAlertInline(card, err.message, true);
+        showAlertInline(err.message, true);
       } finally {
         btn.disabled = false;
       }
     });
   });
 
-  // Suggested-category quick buttons from the issue text.
+  // Suggested-category quick-fix buttons from the issue text.
   $$(".cat-fix").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const card = btn.closest(".row-card");
-      const { row, tenant, upload } = btn.dataset;
+      const { row } = btn.dataset;
       const select = $(`.edit-input[data-field="category"]`, card);
-      select.value = btn.dataset.category;
-      const result = await api(
-        "PATCH",
-        `/tenants/${tenant}/menu/uploads/${upload}/items/${row}`,
-        { changes: { category: btn.dataset.category } }
-      );
-      updateRowCard(card, result);
-      updateSummary(result.report);
+      if (select) select.value = btn.dataset.category;
+      try {
+        const result = await patchRow(row, { category: btn.dataset.category });
+        afterRowUpdate(card, result);
+      } catch (err) {
+        showAlertInline(err.message, true);
+      }
     });
   });
 
-  // Photo-conflict quick resolution.
+  // Add item: owner creates a new blank row, then fills it in like any other.
+  const addBtn = $("#add-item-btn");
+  if (addBtn) {
+    addBtn.addEventListener("click", async () => {
+      addBtn.disabled = true;
+      const { tenant, upload } = pageCtx();
+      try {
+        await api("POST", `/tenants/${tenant}/menu/uploads/${upload}/items`);
+        location.reload();
+      } catch (err) {
+        showAlertInline(err.message, true);
+        addBtn.disabled = false;
+      }
+    });
+  }
+
+  // Delete row: owner removes an item outright (e.g. one of two duplicates).
+  $$(".row-delete").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      if (!confirm("Delete this row? The item is removed from this upload "
+                   + "(already-published versions are not affected).")) return;
+      const { tenant, upload } = pageCtx();
+      const { row } = btn.dataset;
+      btn.disabled = true;
+      try {
+        await api("DELETE", `/tenants/${tenant}/menu/uploads/${upload}/items/${row}`);
+        location.reload();
+      } catch (err) {
+        showAlertInline(err.message, true);
+        btn.disabled = false;
+      }
+    });
+  });
+
+  // Per-row photo upload (multipart, so not via the JSON api() helper).
+  $$(".row-photo input").forEach((inp) => {
+    inp.addEventListener("change", async () => {
+      const f = inp.files[0];
+      if (!f) return;
+      const label = inp.closest(".row-photo");
+      const { tenant, upload } = pageCtx();
+      const { row } = label.dataset;
+      const fd = new FormData();
+      fd.append("file", f);
+      try {
+        const resp = await fetch(
+          `/tenants/${tenant}/menu/uploads/${upload}/items/${row}/photo`,
+          { method: "POST", body: fd },
+        );
+        if (!resp.ok) {
+          const data = await resp.json().catch(() => ({}));
+          const msg = data.error ? data.error.message : `Upload failed (${resp.status})`;
+          throw new Error(msg);
+        }
+        location.reload();
+      } catch (err) {
+        showAlertInline(err.message, true);
+      } finally {
+        inp.value = "";
+      }
+    });
+  });
+
+  // Photo-conflict quick resolution: owner picks which source is right.
   $$(".conflict-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
       const card = btn.closest(".row-card");
-      const { row, tenant, upload } = btn.dataset;
-      const result = await api(
-        "PATCH",
-        `/tenants/${tenant}/menu/uploads/${upload}/items/${row}`,
-        { changes: { price: btn.dataset.price } }
-      );
-      updateRowCard(card, result);
-      updateSummary(result.report);
+      const { row } = btn.dataset;
+      const priceInput = $(`.edit-input[data-field="price"]`, card);
+      const { tenant, upload } = pageCtx();
+      btn.disabled = true;
+      try {
+        if (btn.dataset.action === "keep_sheet") {
+          // Keeping the spreadsheet value is an explicit dismissal, not an
+          // edit: re-sending the same price would just re-raise the conflict.
+          await api("POST", `/tenants/${tenant}/menu/uploads/${upload}/items/${row}/dismiss-conflict`);
+          location.reload();
+          return;
+        }
+        if (priceInput) priceInput.value = btn.dataset.price;
+        const result = await patchRow(row, { price: btn.dataset.price });
+        afterRowUpdate(card, result);
+      } catch (err) {
+        showAlertInline(err.message, true);
+        btn.disabled = false;
+      }
     });
   });
 
   // Orphan-photo assignment gallery.
   $$(".photo-assign").forEach((sel) => {
     sel.addEventListener("change", async () => {
-      const tenant = $(".publish-btn")?.dataset.tenant || new URLSearchParams(location.search).get("t");
-      const upload = $(".publish-btn")?.dataset.upload || location.pathname.split("/")[4];
-      const tenantEl = $("#publish-btn");
       if (!sel.value) return;
-      await api(
-        "POST",
-        `/tenants/${tenantEl.dataset.tenant}/menu/uploads/${tenantEl.dataset.upload}/photos/${sel.dataset.filename}/assign`,
-        { row_index: parseInt(sel.value, 10) }
-      );
-      location.reload();
+      const { tenant, upload } = pageCtx();
+      try {
+        await api(
+          "POST",
+          `/tenants/${tenant}/menu/uploads/${upload}/photos/${sel.dataset.filename}/assign`,
+          { row_index: parseInt(sel.value, 10) }
+        );
+        location.reload();
+      } catch (err) {
+        showAlertInline(err.message, true);
+      }
     });
   });
 
@@ -168,28 +266,27 @@ if ($(".row-save")) {
   if (publishBtn) {
     publishBtn.addEventListener("click", async () => {
       publishBtn.disabled = true;
+      const { tenant, upload } = pageCtx();
       try {
-        const result = await api(
-          "POST",
-          `/tenants/${publishBtn.dataset.tenant}/menu/uploads/${publishBtn.dataset.upload}/publish`
-        );
-        window.location = `/tenants/${publishBtn.dataset.tenant}/versions?published=${result.version}`;
+        const result = await api("POST", `/tenants/${tenant}/menu/uploads/${upload}/publish`);
+        window.location = `/tenants/${tenant}/versions?published=${result.version}`;
       } catch (err) {
-        showAlertInline(document.body, err.message, true);
+        showAlertInline(err.message, true);
         publishBtn.disabled = false;
       }
     });
   }
 
-  // Partial re-upload merge.
+  // Partial re-upload merge (correction path b).
   const partial = $("#partial-file");
   if (partial) {
     partial.addEventListener("change", async () => {
-      const publishBtn = $("#publish-btn");
+      if (!partial.files.length) return;
+      const { tenant, upload } = pageCtx();
       const form = new FormData();
       form.append("file", partial.files[0]);
       const resp = await fetch(
-        `/tenants/${publishBtn.dataset.tenant}/menu/uploads/${publishBtn.dataset.upload}/partial-reupload`,
+        `/tenants/${tenant}/menu/uploads/${upload}/partial-reupload`,
         { method: "POST", body: form }
       );
       const data = await resp.json();
@@ -199,6 +296,22 @@ if ($(".row-save")) {
       }
       location.reload();
     });
+  }
+}
+
+/* Post-mutation refresh. The badge + summary always update; if the row is
+   now valid its issue cards are removed in place, but if issues REMAIN the
+   page reloads so the current, server-computed issue list is shown — never
+   leave a stale issue card on screen. */
+function afterRowUpdate(card, result) {
+  updateRowCard(card, result);
+  updateSummary(result.report);
+  if (result.status === "valid") {
+    const issues = $(".row-issues", card);
+    if (issues) issues.remove();
+  } else {
+    location.reload();
+    return;
   }
 }
 
@@ -234,12 +347,11 @@ function updateSummary(report) {
   }
 }
 
-function showAlertInline(context, message, isError) {
+function showAlertInline(message, isError) {
   let box = $("#inline-alert");
   if (!box) {
     box = document.createElement("div");
     box.id = "inline-alert";
-    box.className = "fixed bottom-4 right-4 rounded-xl px-4 py-3 text-sm shadow-lg z-50";
     document.body.appendChild(box);
   }
   box.className =
@@ -253,25 +365,20 @@ function showAlertInline(context, message, isError) {
 const publishPage = $("#publish-btn-page");
 if (publishPage) {
   publishPage.addEventListener("click", async () => {
-    // The upload id is not on this page; publish from the versions of the
-    // last upload via the report page. Simplest: go back and use its button.
     publishPage.disabled = true;
-    const uploadId = new URLSearchParams(location.search).get("u");
-    if (uploadId) {
-      try {
-        await api("POST", `/tenants/${tenantFromPath()}/menu/uploads/${uploadId}/publish`);
-        location.href = `/tenants/${tenantFromPath()}/versions`;
-      } catch (err) {
-        alert(err.message);
-        publishPage.disabled = false;
-      }
+    const { tenant, upload } = pageCtx(); // /tenants/{t}/uploads/{u}/preview
+    if (!tenant || !upload) {
+      history.back(); // fall back to the report page's publish button
       return;
     }
-    history.back();
+    try {
+      await api("POST", `/tenants/${tenant}/menu/uploads/${upload}/publish`);
+      location.href = `/tenants/${tenant}/versions`;
+    } catch (err) {
+      showAlertInline(err.message, true);
+      publishPage.disabled = false;
+    }
   });
-}
-function tenantFromPath() {
-  return location.pathname.split("/")[2] || "spicehub-kitchen-troy";
 }
 
 /* --------------------------- Versions page ----------------------------- */

@@ -187,6 +187,7 @@ def _clean_item(item: dict) -> dict:
         "source_row": item.get("source_row"),
         "sort_order_invalid": bool(item.get("sort_order_invalid")),
         "conflict_dismissed": bool(item.get("conflict_dismissed")),
+        "owner_added": bool(item.get("owner_added")),
         "photo_price": item.get("photo_price"),
     }
 
@@ -267,6 +268,15 @@ def revalidate(tenant: TenantConfig, upload_id: str) -> dict:
     db.execute("DELETE FROM validation_issues WHERE upload_id=?", (upload_id,))
     items = _load_items(upload_id)
     photos = _photo_map(upload_id)
+    # Normalize image filenames to the actual on-disk photo name (case and
+    # whitespace) so the media URL points at a real file even when the
+    # spreadsheet spells it differently (e.g. GOAT_BIRYANI.JPG vs
+    # goat_biryani.jpg — matching is case-insensitive, the URL must not be).
+    disk_by_lower = {p.lower(): p for p in photos}
+    for _, item in items:
+        ref = (item.get("image_filename") or "").strip()
+        if ref and ref.lower() in disk_by_lower and disk_by_lower[ref.lower()] != ref:
+            item["image_filename"] = disk_by_lower[ref.lower()]
     ctx = RuleContext(tenant=tenant, photo_filenames=photos, similarity=embeddings.similarity)
 
     counts = {"valid": 0, "warning": 0, "error": 0}
@@ -337,7 +347,7 @@ def revalidate(tenant: TenantConfig, upload_id: str) -> dict:
     )
 
     # Unmatched (orphan) photos: resolvable from the dashboard gallery.
-    referenced = {i.get("image_filename", "").lower() for _, i in items}
+    referenced = {(i.get("image_filename") or "").lower() for _, i in items}
     orphan_tuples = []
     for filename in photos.values():
         if filename.lower() not in referenced:
@@ -626,6 +636,81 @@ def merge_partial_reupload(
     return report
 
 
+def add_item(tenant: TenantConfig, upload_id: str) -> dict:
+    """Owner adds a new, blank menu item row to this pending upload.
+
+    The row arrives empty; validation immediately flags the missing required
+    fields and the owner fills them in with the inline editor (Save changes
+    re-validates). The item_id is auto-generated in the MENU-#### style so a
+    later partial re-upload can still merge by item_id.
+    """
+    _require_upload(upload_id)
+    existing = _load_items(upload_id)
+    next_row = max((row for row, _ in existing), default=0) + 1
+    used = {item.get("item_id") for _, item in existing}
+    n = 1
+    while f"MENU-{n:04d}" in used:
+        n += 1
+    new_item = {
+        "item_id": f"MENU-{n:04d}",
+        "item_name": "",
+        "price": None,
+        "category": "",
+        "is_featured": False,
+        "is_available": True,
+        "owner_added": True,
+        "repairs": ["row added by owner from the dashboard"],
+    }
+    db.execute(
+        "INSERT INTO upload_items (upload_id, tenant_id, row_index, item_id,"
+        " fields_json, status, updated_at) VALUES (?,?,?,?,?,?,?)",
+        (
+            upload_id, tenant.tenant_id, next_row, new_item["item_id"],
+            db.j(_clean_item(new_item)), "error", utcnow(),
+        ),
+    )
+    audit(
+        tenant.tenant_id, "owner", "item.added",
+        upload_id=upload_id, row=next_row, item_id=new_item["item_id"],
+    )
+    report = revalidate(tenant, upload_id)
+    report["added_row"] = next_row
+    return report
+
+def delete_item(tenant: TenantConfig, upload_id: str, row_index: int) -> dict:
+    """Owner deletes a row outright (e.g. one of two duplicate dishes).
+
+    Deleting only affects this pending upload — already-published versions
+    are immutable. A photo assigned to the deleted row becomes an orphan
+    again and can be re-assigned or ignored.
+    """
+    _require_upload(upload_id)
+    item = db.query_one(
+        "SELECT item_id FROM upload_items WHERE upload_id=? AND row_index=?",
+        (upload_id, row_index),
+    )
+    if item is None:
+        raise RowNotFoundError(f"Row {row_index} not found in this upload.")
+    db.execute(
+        "DELETE FROM upload_items WHERE upload_id=? AND row_index=?",
+        (upload_id, row_index),
+    )
+    db.execute(
+        "DELETE FROM validation_issues WHERE upload_id=? AND item_row=?",
+        (upload_id, row_index),
+    )
+    db.execute(
+        "UPDATE photos SET matched_row=NULL WHERE upload_id=? AND matched_row=?",
+        (upload_id, row_index),
+    )
+    audit(
+        tenant.tenant_id, "owner", "item.deleted",
+        upload_id=upload_id, row=row_index, item_id=item["item_id"],
+    )
+    report = revalidate(tenant, upload_id)
+    report["deleted_row"] = row_index
+    return report
+
 def assign_photo(tenant: TenantConfig, upload_id: str, filename: str, row_index: int) -> dict:
     """Owner assigns an unmatched (orphan) photo to a menu item."""
     photo = db.query_one(
@@ -695,7 +780,7 @@ def _preview_item(tenant: TenantConfig, upload_id: str, item: dict) -> dict:
         "is_featured": bool(item.get("is_featured")),
         "is_available": bool(item.get("is_available")),
         "image_url": (
-            f"/media/tenants/{tenant.tenant_id}/uploads/{upload_id}/images/{filename}"
+            f"/media/tenants/{tenant.tenant_id}/menu/uploads/{upload_id}/images/{filename}"
             if filename
             else None
         ),

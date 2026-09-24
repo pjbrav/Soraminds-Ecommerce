@@ -34,7 +34,7 @@
   {% if issue.suggestion %}<div class="text-neutral-600 mt-1">{{ issue.suggestion }}</div>{% endif %}
   {% if issue.code == 'photo_unmatched' %}
   <div class="mt-2 flex items-center gap-2">
-    <img src="/media/tenants/{{ report.tenant_id }}/uploads/{{ report.upload_id }}/images/{{ issue.extra.filename }}" class="w-16 h-16 object-cover rounded-lg border" alt="">
+    <img src="/media/tenants/{{ report.tenant_id }}/menu/uploads/{{ report.upload_id }}/images/{{ issue.extra.filename }}" class="w-16 h-16 object-cover rounded-lg border" alt="">
     <select class="photo-assign border rounded-lg px-2 py-1 text-xs" data-filename="{{ issue.extra.filename }}">
       <option value="">Assign this photo to…</option>
       {% for row in report.rows %}<option value="{{ row.row_index }}">Row {{ row.row_index }} — {{ row.fields.item_name }}</option>{% endfor %}
@@ -60,6 +60,9 @@
      class="rounded-xl px-4 py-2.5 font-bold text-sm bg-[#eb1700] text-white hover:bg-[#c91300] disabled:opacity-40" {{ '' if report.publishable else 'disabled' }}>
      Publish menu</a>
   </button>
+  <button id="add-item-btn" data-upload="{{ report.upload_id }}" data-tenant="{{ report.tenant_id }}"
+     class="rounded-xl px-4 py-2.5 font-bold text-sm bg-white border border-neutral-300 hover:border-neutral-500">
+     ＋ Add item</button>
   <label class="rounded-xl px-4 py-2.5 font-bold text-sm bg-white border border-neutral-300 cursor-pointer hover:border-neutral-500">
     ⬆ Partial re-upload (merge by item_id)
     <input id="partial-file" type="file" accept=".xlsx,.csv" class="hidden">
@@ -132,15 +135,15 @@
 
   <!-- issues + photo -->
   {% if row.issues %}
-  <div class="px-4 pb-3 space-y-2">
+  <div class="row-issues px-4 pb-3 space-y-2">
     {% for issue in row.issues %}
     <div class="rounded-lg px-3 py-2 text-sm {{ 'bg-red-50 border border-red-200' if issue.severity == 'hard' else 'bg-amber-50 border border-amber-200' if issue.severity in ('soft','warning') else 'bg-neutral-50 border border-neutral-200' }}">
       <div class="font-semibold">{{ issue.message }}</div>
       {% if issue.suggestion %}<div class="text-neutral-600">{{ issue.suggestion }}</div>{% endif %}
       {% if issue.code == 'photo_conflict' %}
       <div class="mt-2 flex flex-wrap gap-2">
-        <button class="conflict-btn rounded-lg bg-white border border-red-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-price="{{ issue.extra.photo_price }}">Use photo price (${{ '%.2f'|format(issue.extra.photo_price) }})</button>
-        <button class="conflict-btn rounded-lg bg-white border border-neutral-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-price="{{ issue.extra.sheet_price }}">Keep spreadsheet price (${{ '%.2f'|format(issue.extra.sheet_price) }})</button>
+        <button class="conflict-btn rounded-lg bg-white border border-red-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-action="use_photo" data-price="{{ issue.extra.photo_price }}">Use photo price (${{ '%.2f'|format(issue.extra.photo_price) }})</button>
+        <button class="conflict-btn rounded-lg bg-white border border-neutral-300 px-2.5 py-1 text-xs font-bold" data-row="{{ row.row_index }}" data-action="keep_sheet" data-price="{{ issue.extra.sheet_price }}">Keep spreadsheet price (${{ '%.2f'|format(issue.extra.sheet_price) }})</button>
       </div>
       {% endif %}
       {% if issue.code in ('category_ambiguous', 'category', 'unknown_category') %}
@@ -157,11 +160,12 @@
 
   <div class="flex items-center gap-3 px-4 pb-3">
     <img class="w-14 h-14 rounded-lg border object-cover bg-neutral-100" loading="lazy"
-         src="/media/tenants/{{ report.tenant_id }}/uploads/{{ report.upload_id }}/images/{{ (row.fields.image_filename or 'x') }}"
+         src="/media/tenants/{{ report.tenant_id }}/menu/uploads/{{ report.upload_id }}/images/{{ (row.fields.image_filename or 'x') }}"
          onerror="this.style.visibility='hidden'">
     <button class="row-save rounded-xl bg-neutral-900 text-white text-xs font-bold px-3 py-2"
             data-row="{{ row.row_index }}" data-tenant="{{ report.tenant_id }}" data-upload="{{ report.upload_id }}">Save changes</button>
     <span class="row-saved text-xs text-green-700 hidden">Saved ✓</span>
+    <button class="row-delete text-xs font-semibold text-red-600 underline decoration-dotted underline-offset-2 ml-2" data-row="{{ row.row_index }}" title="Remove this item from the menu">Delete row</button>
     {% if row.fields.repairs %}
     <details class="ml-auto text-xs text-neutral-400">
       <summary class="cursor-pointer">auto-fixes applied</summary>

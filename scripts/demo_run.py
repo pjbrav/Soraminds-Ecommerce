@@ -13,7 +13,16 @@ from __future__ import annotations
 
 # Some sandboxed CI environments cap process virtual memory below what torch
 # needs; raise the soft limit when the hard limit allows it.
-import resource
+try:
+    import resource
+except ImportError:  # Windows: stdlib 'resource' does not exist -> harmless stub
+    import types
+    resource = types.SimpleNamespace(
+        RLIMIT_AS=0,
+        RLIM_INFINITY=-1,
+        getrlimit=lambda *a: (0, -1),
+        setrlimit=lambda *a: None,
+    )
 
 try:
     soft, hard = resource.getrlimit(resource.RLIMIT_AS)

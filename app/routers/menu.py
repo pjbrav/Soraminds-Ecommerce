@@ -144,6 +144,18 @@ def dismiss_conflict(tenant_id: str, upload_id: str, row_index: int):
     return pipeline.dismiss_photo_conflict(tenant, upload_id, row_index)
 
 
+@router.post("/uploads/{upload_id}/items")
+def add_item(tenant_id: str, upload_id: str):
+    """Owner adds a new blank item row to fill in from the dashboard."""
+    tenant = _tenant(tenant_id)
+    return pipeline.add_item(tenant, upload_id)
+
+@router.delete("/uploads/{upload_id}/items/{row_index}")
+def delete_item(tenant_id: str, upload_id: str, row_index: int):
+    """Owner deletes a row outright (e.g. one of two duplicate dishes)."""
+    tenant = _tenant(tenant_id)
+    return pipeline.delete_item(tenant, upload_id, row_index)
+
 @router.post("/uploads/{upload_id}/photos/{filename}/assign")
 def assign_photo(tenant_id: str, upload_id: str, filename: str, body: AssignPhotoRequest):
     """Owner assigns an unmatched (orphan) photo to a menu item."""

@@ -5,7 +5,16 @@ Env vars are set BEFORE any app import so the settings module picks them up.
 from __future__ import annotations
 
 # Some CI sandboxes cap virtual memory below what a full test run needs.
-import resource
+try:
+    import resource
+except ImportError:  # Windows: stdlib 'resource' does not exist -> harmless stub
+    import types
+    resource = types.SimpleNamespace(
+        RLIMIT_AS=0,
+        RLIM_INFINITY=-1,
+        getrlimit=lambda *a: (0, -1),
+        setrlimit=lambda *a: None,
+    )
 
 try:
     soft, hard = resource.getrlimit(resource.RLIMIT_AS)

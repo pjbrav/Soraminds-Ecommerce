@@ -283,6 +283,18 @@ def check_image_filename(item: dict, ctx: RuleContext) -> list[Issue]:
     rule = Rule("image_filename", "image_filename", HARD, check_image_filename)
     value = item.get("image_filename")
     if not value:
+        if item.get("owner_added"):
+            # Rows created from the dashboard have no photo file to reference
+            # yet; they can publish with the kiosk's neutral placeholder.
+            soft_rule = Rule("image_filename", "image_filename", WARN, check_image_filename)
+            return [
+                _issue(
+                    soft_rule,
+                    "No photo for this item yet.",
+                    "It will show a neutral placeholder on the kiosk. Assign "
+                    "one of the unmatched photos above if it belongs here.",
+                )
+            ]
         return [
             _issue(
                 rule,
@@ -413,7 +425,7 @@ def validate_menu_level(items: list[dict], tenant: TenantConfig) -> list[tuple[i
                     "severity": WARN,
                     "message": msg,
                     "suggestion": "If these are two different dishes, rename one. "
-                    "If not, delete one row (a partial re-upload without it works).",
+                    "If not, use the Delete row button below the item to remove it.",
                     "extra": {"duplicate_of_row": b_idx + 1, "similarity": round(sim, 2)},
                 }
                 results.append((a_idx + 1, issue))
