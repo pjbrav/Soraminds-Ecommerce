@@ -1,0 +1,85 @@
+========================================================================
+PATH 1 — messy menu (owner-resolvable issues end to end)
+========================================================================
+uploaded messy_menu.xlsx -> uploadId 3443f0b9d679 | 28 items | 5 errors, 2 warnings, 21 valid | vision: rapidocr
+  counts: {'valid': 21, 'warning': 2, 'error': 5} | hard errors: 5 | publishable: False
+  [upload] warning: 12 items are marked featured (more than 10).
+  [upload] soft: Photo 'chef_special.jpg' is not referenced by any menu item.
+  row  3   ERROR Chilli Paneer
+          - hard/photo_conflict: The photo for this item shows $13.99 but the spreadsheet says $14.99.
+  row  6   ERROR Tandoori Shrimp
+          - hard/price: Price is missing or could not be read as a number.
+  row 10   ERROR Butter Chicken
+          - hard/category: Category 'Currys' is not recognized.
+  row 16   ERROR Chicken Biryani
+          - soft/calorie_range: Calorie range '550-7' is not in the NNN-NNN format.
+          - hard/photo_conflict: The photo for this item shows $11.99 but the spreadsheet says $13.99.
+  row 19 WARNING Paneer Biryani
+          - warning/near_duplicate: 'Paneer Biryani' looks like a duplicate of 'Paneer Biriyani' in the same category.
+  row 20 WARNING Naan
+          - soft/allergens: Unrecognized allergen(s): Spices.
+  row 24   ERROR Rasmalai (3)
+          - hard/image_filename: No uploaded photo matches 'rasmalai.jpg'.
+
+--- Owner resolves every blocking issue via the dashboard/API ---
+  [owner edit] row 6: entered missing price 13.99 -> status now 'valid'
+  [owner edit] row 10: 'Currys' -> 'Non Veg Curries' -> status now 'valid'
+  [owner edit] assigned orphan photo chef_special.jpg -> 'Rasmalai (3)' (status valid)
+  [owner edit] Chilli Paneer: kept spreadsheet $14.99 (photo is stale) -> {'valid': 25, 'warning': 2, 'error': 1}
+  [owner edit] row 16: photo price $11.99 wins over sheet -> status now 'warning'
+  [owner edit] row 16: fixed calorie range to 550-700 -> status now 'valid'
+  [owner edit] row 20: removed unknown allergen 'Spices' -> status now 'valid'
+  [partial re-upload] renamed near-duplicate row via item_id MENU-0028 -> merged: ['MENU-0028']
+
+--- Re-validate after owner corrections ---
+  counts: {'valid': 28, 'warning': 0, 'error': 0} | hard errors: 0 | publishable: True
+
+--- Live preview (same JSON that will publish) ---
+  featured strip: 12 items; categories: 10 (Veg Appetizers, Non Veg Appetizers, Veg Curries...)
+  publish -> {'version': 1, 'item_count': 28, 'resized_images': 27, 'message': 'Published menu-v1 — it is now the active menu.'}
+  active menu: v1 with 28 items; featured endpoint returns 12
+  kiosk-ready JSON written to /scratch/work/spicehub-menu-ingestion/demo/output/kiosk_menu_v1_messy_fixed.json
+
+========================================================================
+PATH 2 — clean menu (happy path, direct publish)
+========================================================================
+uploaded clean_menu.xlsx -> uploadId a8dbb99b2696 | 27 items | 0 errors, 0 warnings, 27 valid | vision: rapidocr
+  counts: {'valid': 27, 'warning': 0, 'error': 0} | hard errors: 0 | publishable: True
+  row  1   VALID Samosa (2)
+  row  2   VALID Gobi Manchurian
+  row  3   VALID Chilli Paneer
+  row  4   VALID Madras Chicken 65
+  row  5   VALID Chicken Lollipop - Wet
+  row  6   VALID Tandoori Shrimp
+  row  7   VALID Paneer Butter Masala
+  row  8   VALID Dal Makhani
+  row  9   VALID Malai Kofta
+  row 10   VALID Butter Chicken
+  row 11   VALID Egg Masala
+  row 12   VALID Chettinad Goat Curry
+  row 13   VALID Veg Fried Rice
+  row 14   VALID Chicken Fried Rice
+  row 15   VALID Chicken 65 Fried Rice
+  row 16   VALID Chicken Biryani
+  row 17   VALID Gongura Chicken Biryani
+  row 18   VALID Goat Biryani
+  row 19   VALID Paneer Biryani
+  row 20   VALID Naan
+  row 21   VALID Garlic Naan
+  row 22   VALID Roti
+  row 23   VALID Gulab Jamun (3)
+  row 24   VALID Rasmalai (3)
+  row 25   VALID Mango Lassi
+  row 26   VALID Spicehub Veg Soup
+  row 27   VALID Sweet Corn Soup
+  publish -> {'version': 2, 'item_count': 27, 'resized_images': 27, 'message': 'Published menu-v2 — it is now the active menu.'}
+  kiosk-ready JSON written to /scratch/work/spicehub-menu-ingestion/demo/output/kiosk_menu_v2_clean.json
+
+--- Version history + rollback ---
+  rollback to v1: Rolled back to menu-v1.
+  rollback to v2: Rolled back to menu-v2.
+
+LLM usage rows: 0 (descriptions use the deterministic fallback unless OPENAI_API_KEY is set)
+Audit log actions: validation.recomputedx12, row.editedx6, upload.processedx2, menu.rolled_backx2, menu.publishedx2, photo_conflict.dismissedx1, photo.assignedx1, partial_reupload.mergedx1
+
+Demo complete. Dashboard equivalents of every step above live at /

@@ -1,0 +1,1271 @@
+{
+  "tenant_id": "spicehub-kitchen-troy",
+  "restaurant_name": "SpiceHub Kitchen",
+  "version": 2,
+  "published_at": "2026-09-24T02:10:38Z",
+  "published_by": "owner",
+  "item_count": 27,
+  "items": [
+    {
+      "item_id": "MENU-0001",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Samosa (2)",
+      "description": "Fried crispy shell stuffed with spiced potatoes, peas, coriander and served with chutney.",
+      "description_auto_generated": false,
+      "price": 2.5,
+      "currency": "USD",
+      "dietary_type": "Vegan",
+      "spice_level": "Mild",
+      "calorie_range": "150-250",
+      "allergens": [
+        "Gluten"
+      ],
+      "image": {
+        "filename": "samosa.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/samosa.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 1,
+      "tags": [
+        "fried",
+        "starter"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_5fe444",
+        "source_text": "Samosa (2). Veg Appetizers. Fried crispy shell stuffed with spiced potatoes, peas, coriander and served with chutney. fried, starter."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:35Z",
+      "updated_at": "2026-09-24T02:10:35Z"
+    },
+    {
+      "item_id": "MENU-0002",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Gobi Manchurian",
+      "description": "Fried cauliflower fritters tossed with green onion, garlic and soy sauce based gravy.",
+      "description_auto_generated": false,
+      "price": 10.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Medium",
+      "calorie_range": "300-450",
+      "allergens": [
+        "Soy",
+        "Gluten"
+      ],
+      "image": {
+        "filename": "gobi_manchurian.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/gobi_manchurian.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 2,
+      "tags": [
+        "indo-chinese",
+        "fried"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_d1b12b",
+        "source_text": "Gobi Manchurian. Veg Appetizers. Fried cauliflower fritters tossed with green onion, garlic and soy sauce based gravy. indo-chinese, fried."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:35Z",
+      "updated_at": "2026-09-24T02:10:35Z"
+    },
+    {
+      "item_id": "MENU-0003",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Chilli Paneer",
+      "description": "Indian cottage cheese tossed with tangy sauce, onions and peppers.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Hot",
+      "calorie_range": "350-500",
+      "allergens": [
+        "Dairy",
+        "Gluten"
+      ],
+      "image": {
+        "filename": "chilli_paneer.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chilli_paneer.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 3,
+      "tags": [
+        "indo-chinese",
+        "spicy"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_5a7e0e",
+        "source_text": "Chilli Paneer. Veg Appetizers. Indian cottage cheese tossed with tangy sauce, onions and peppers. indo-chinese, spicy."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:35Z",
+      "updated_at": "2026-09-24T02:10:35Z"
+    },
+    {
+      "item_id": "MENU-0004",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Madras Chicken 65",
+      "description": "Marinated chicken, deep fried with madras spices.",
+      "description_auto_generated": false,
+      "price": 12.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Hot",
+      "calorie_range": "350-500",
+      "allergens": [],
+      "image": {
+        "filename": "madras_chicken_65.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/madras_chicken_65.jpg",
+        "status": "approved"
+      },
+      "is_featured": true,
+      "is_available": true,
+      "sort_order": 4,
+      "tags": [
+        "fried",
+        "spicy",
+        "popular"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_ee0a0c",
+        "source_text": "Madras Chicken 65. Non Veg Appetizers. Marinated chicken, deep fried with madras spices. fried, spicy, popular."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:35Z",
+      "updated_at": "2026-09-24T02:10:35Z"
+    },
+    {
+      "item_id": "MENU-0005",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Chicken Lollipop - Wet",
+      "description": "Chicken lollipop, deep-fried and tossed in a tangy and spicy sauce, typically includes a mix of herbs and Indian spices.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Hot",
+      "calorie_range": "400-550",
+      "allergens": [],
+      "image": {
+        "filename": "chicken_lollipop_wet.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chicken_lollipop_wet.jpg",
+        "status": "approved"
+      },
+      "is_featured": true,
+      "is_available": true,
+      "sort_order": 5,
+      "tags": [
+        "fried",
+        "shareable",
+        "popular"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_44f1b9",
+        "source_text": "Chicken Lollipop - Wet. Non Veg Appetizers. Chicken lollipop, deep-fried and tossed in a tangy and spicy sauce, typically includes a mix of herbs and Indian spices. fried, shareable, popular."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:35Z",
+      "updated_at": "2026-09-24T02:10:35Z"
+    },
+    {
+      "item_id": "MENU-0006",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Appetizers",
+      "subcategory": "",
+      "item_name": "Tandoori Shrimp",
+      "description": "Shrimp marinated in a blend of yogurt and spices, skewered, and traditionally roasted in a tandoor oven.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Medium",
+      "calorie_range": "250-400",
+      "allergens": [
+        "Shellfish",
+        "Dairy"
+      ],
+      "image": {
+        "filename": "tandoori_shrimp.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/tandoori_shrimp.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 6,
+      "tags": [
+        "tandoor",
+        "grilled"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_7dbe28",
+        "source_text": "Tandoori Shrimp. Non Veg Appetizers. Shrimp marinated in a blend of yogurt and spices, skewered, and traditionally roasted in a tandoor oven. tandoor, grilled."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0007",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Curries",
+      "subcategory": "",
+      "item_name": "Paneer Butter Masala",
+      "description": "Cubes of home-made indian cheese, grilled and cooked with a creamy curry sauce.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Mild",
+      "calorie_range": "450-600",
+      "allergens": [
+        "Dairy"
+      ],
+      "image": {
+        "filename": "paneer_butter_masala.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/paneer_butter_masala.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 7,
+      "tags": [
+        "creamy",
+        "classic"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_6add5b",
+        "source_text": "Paneer Butter Masala. Veg Curries. Cubes of home-made indian cheese, grilled and cooked with a creamy curry sauce. creamy, classic."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0008",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Curries",
+      "subcategory": "",
+      "item_name": "Dal Makhani",
+      "description": "Rich and creamy lentil butter curry, a vegetarian delight bursting with aromatic Indian spices.",
+      "description_auto_generated": false,
+      "price": 11.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Mild",
+      "calorie_range": "350-500",
+      "allergens": [
+        "Dairy"
+      ],
+      "image": {
+        "filename": "dal_makhani.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/dal_makhani.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 8,
+      "tags": [
+        "creamy",
+        "comfort food"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_36afdf",
+        "source_text": "Dal Makhani. Veg Curries. Rich and creamy lentil butter curry, a vegetarian delight bursting with aromatic Indian spices. creamy, comfort food."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0009",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Veg Curries",
+      "subcategory": "",
+      "item_name": "Malai Kofta",
+      "description": "Vegetable dumplings cooked with herbs and spices in a creamy sauce.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Mild",
+      "calorie_range": "400-550",
+      "allergens": [
+        "Dairy",
+        "Nuts"
+      ],
+      "image": {
+        "filename": "malai_kofta.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/malai_kofta.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 9,
+      "tags": [
+        "creamy",
+        "dumplings"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_32c029",
+        "source_text": "Malai Kofta. Veg Curries. Vegetable dumplings cooked with herbs and spices in a creamy sauce. creamy, dumplings."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0010",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Curries",
+      "subcategory": "",
+      "item_name": "Butter Chicken",
+      "description": "Specially marinated chicken, cooked in rich tomato butter creamy sauce.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Mild",
+      "calorie_range": "450-600",
+      "allergens": [
+        "Dairy"
+      ],
+      "image": {
+        "filename": "butter_chicken.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/butter_chicken.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 10,
+      "tags": [
+        "creamy",
+        "classic"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_ae4cc9",
+        "source_text": "Butter Chicken. Non Veg Curries. Specially marinated chicken, cooked in rich tomato butter creamy sauce. creamy, classic."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0011",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Curries",
+      "subcategory": "",
+      "item_name": "Egg Masala",
+      "description": "Boiled egg cooked with onion tomato masala and indian spices.",
+      "description_auto_generated": false,
+      "price": 11.99,
+      "currency": "USD",
+      "dietary_type": "Egg",
+      "spice_level": "Medium",
+      "calorie_range": "300-450",
+      "allergens": [
+        "Egg"
+      ],
+      "image": {
+        "filename": "egg_masala.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/egg_masala.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 11,
+      "tags": [
+        "comfort food"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_a1d7ae",
+        "source_text": "Egg Masala. Non Veg Curries. Boiled egg cooked with onion tomato masala and indian spices. comfort food."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0012",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Non Veg Curries",
+      "subcategory": "",
+      "item_name": "Chettinad Goat Curry",
+      "description": "Goat cooked in special curry sauce, tossed with garlic, chilli, coriander and spices.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Hot",
+      "calorie_range": "400-550",
+      "allergens": [],
+      "image": {
+        "filename": "chettinad_goat_curry.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chettinad_goat_curry.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 12,
+      "tags": [
+        "regional",
+        "spicy"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_e96b30",
+        "source_text": "Chettinad Goat Curry. Non Veg Curries. Goat cooked in special curry sauce, tossed with garlic, chilli, coriander and spices. regional, spicy."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0013",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Rice",
+      "subcategory": "",
+      "item_name": "Veg Fried Rice",
+      "description": "Rice with veggies fried with exotic sauces, a classic street side preparation.",
+      "description_auto_generated": false,
+      "price": 11.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Mild",
+      "calorie_range": "400-550",
+      "allergens": [
+        "Soy"
+      ],
+      "image": {
+        "filename": "veg_fried_rice.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/veg_fried_rice.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 13,
+      "tags": [
+        "indo-chinese"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_858c75",
+        "source_text": "Veg Fried Rice. Rice. Rice with veggies fried with exotic sauces, a classic street side preparation. indo-chinese."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0014",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Rice",
+      "subcategory": "",
+      "item_name": "Chicken Fried Rice",
+      "description": "Rice with shredded chicken a classic street side preparation.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Mild",
+      "calorie_range": "450-600",
+      "allergens": [
+        "Soy"
+      ],
+      "image": {
+        "filename": "chicken_fried_rice.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chicken_fried_rice.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 14,
+      "tags": [
+        "indo-chinese"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_4861aa",
+        "source_text": "Chicken Fried Rice. Rice. Rice with shredded chicken a classic street side preparation. indo-chinese."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0015",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Rice",
+      "subcategory": "",
+      "item_name": "Chicken 65 Fried Rice",
+      "description": "Rice with chicken 65 a classic street side preparation.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Hot",
+      "calorie_range": "500-650",
+      "allergens": [
+        "Soy"
+      ],
+      "image": {
+        "filename": "chicken_65_fried_rice.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chicken_65_fried_rice.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 15,
+      "tags": [
+        "indo-chinese",
+        "spicy"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_eba00c",
+        "source_text": "Chicken 65 Fried Rice. Rice. Rice with chicken 65 a classic street side preparation. indo-chinese, spicy."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:36Z",
+      "updated_at": "2026-09-24T02:10:36Z"
+    },
+    {
+      "item_id": "MENU-0016",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Hyderabadi Dum Biryani",
+      "subcategory": "",
+      "item_name": "Chicken Biryani",
+      "description": "Chicken cooked with spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Medium",
+      "calorie_range": "550-700",
+      "allergens": [
+        "Egg"
+      ],
+      "image": {
+        "filename": "chicken_biryani.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/chicken_biryani.jpg",
+        "status": "approved"
+      },
+      "is_featured": true,
+      "is_available": true,
+      "sort_order": 16,
+      "tags": [
+        "signature",
+        "dum-cooked"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_bf2ae2",
+        "source_text": "Chicken Biryani. Hyderabadi Dum Biryani. Chicken cooked with spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg. signature, dum-cooked."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0017",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Hyderabadi Dum Biryani",
+      "subcategory": "",
+      "item_name": "Gongura Chicken Biryani",
+      "description": "Boneless chicken cooked with sour green leaves, spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Medium",
+      "calorie_range": "550-700",
+      "allergens": [
+        "Egg"
+      ],
+      "image": {
+        "filename": "gongura_chicken_biryani.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/gongura_chicken_biryani.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 17,
+      "tags": [
+        "regional",
+        "tangy"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_de7ee1",
+        "source_text": "Gongura Chicken Biryani. Hyderabadi Dum Biryani. Boneless chicken cooked with sour green leaves, spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg. regional, tangy."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0018",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Hyderabadi Dum Biryani",
+      "subcategory": "",
+      "item_name": "Goat Biryani",
+      "description": "Mutton cooked with spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Non-Veg",
+      "spice_level": "Medium",
+      "calorie_range": "600-750",
+      "allergens": [
+        "Egg"
+      ],
+      "image": {
+        "filename": "goat_biryani.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/goat_biryani.jpg",
+        "status": "approved"
+      },
+      "is_featured": true,
+      "is_available": true,
+      "sort_order": 18,
+      "tags": [
+        "signature",
+        "dum-cooked"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_0303bb",
+        "source_text": "Goat Biryani. Hyderabadi Dum Biryani. Mutton cooked with spices and tomatoes, layered in basmati rice and exotic spices and served with boiled egg. signature, dum-cooked."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0019",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Hyderabadi Dum Biryani",
+      "subcategory": "",
+      "item_name": "Paneer Biryani",
+      "description": "Layered basmati rice with succulent paneer cubes and aromatic spices.",
+      "description_auto_generated": false,
+      "price": 13.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "Medium",
+      "calorie_range": "500-650",
+      "allergens": [
+        "Dairy"
+      ],
+      "image": {
+        "filename": "paneer_biryani.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/paneer_biryani.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 19,
+      "tags": [
+        "dum-cooked"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_48d7bf",
+        "source_text": "Paneer Biryani. Hyderabadi Dum Biryani. Layered basmati rice with succulent paneer cubes and aromatic spices. dum-cooked."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0020",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Breads",
+      "subcategory": "",
+      "item_name": "Naan",
+      "description": "Indian flat bread made with all purpose flour cooked in clay oven.",
+      "description_auto_generated": false,
+      "price": 1.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "150-250",
+      "allergens": [
+        "Gluten"
+      ],
+      "image": {
+        "filename": "naan.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/naan.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 20,
+      "tags": [
+        "tandoor"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_17dbb3",
+        "source_text": "Naan. Breads. Indian flat bread made with all purpose flour cooked in clay oven. tandoor."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0021",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Breads",
+      "subcategory": "",
+      "item_name": "Garlic Naan",
+      "description": "Indian flat bread made with all purpose flour cooked in clay oven, flavored with garlic and herb.",
+      "description_auto_generated": false,
+      "price": 2.49,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "150-250",
+      "allergens": [
+        "Gluten"
+      ],
+      "image": {
+        "filename": "garlic_naan.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/garlic_naan.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 21,
+      "tags": [
+        "tandoor",
+        "popular"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_e4a51b",
+        "source_text": "Garlic Naan. Breads. Indian flat bread made with all purpose flour cooked in clay oven, flavored with garlic and herb. tandoor, popular."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0022",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Breads",
+      "subcategory": "",
+      "item_name": "Roti",
+      "description": "Wheat dough cooked in clay oven.",
+      "description_auto_generated": false,
+      "price": 2.49,
+      "currency": "USD",
+      "dietary_type": "Vegan",
+      "spice_level": "None",
+      "calorie_range": "100-200",
+      "allergens": [
+        "Gluten"
+      ],
+      "image": {
+        "filename": "roti.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/roti.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 22,
+      "tags": [
+        "tandoor"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_b4fb6e",
+        "source_text": "Roti. Breads. Wheat dough cooked in clay oven. tandoor."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0023",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Desserts",
+      "subcategory": "",
+      "item_name": "Gulab Jamun (3)",
+      "description": "Deep fried Khova balls soaked in sticky sugar syrup.",
+      "description_auto_generated": false,
+      "price": 2.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "250-350",
+      "allergens": [
+        "Dairy",
+        "Gluten"
+      ],
+      "image": {
+        "filename": "gulab_jamun.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/gulab_jamun.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 23,
+      "tags": [
+        "sweet",
+        "classic"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_7b6a91",
+        "source_text": "Gulab Jamun (3). Desserts. Deep fried Khova balls soaked in sticky sugar syrup. sweet, classic."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0024",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Desserts",
+      "subcategory": "",
+      "item_name": "Rasmalai (3)",
+      "description": "Soft cooked cheese patties soaked in sweetened and flavored milk sauce.",
+      "description_auto_generated": false,
+      "price": 2.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "200-300",
+      "allergens": [
+        "Dairy",
+        "Nuts"
+      ],
+      "image": {
+        "filename": "rasmalai.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/rasmalai.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 24,
+      "tags": [
+        "sweet",
+        "chilled"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_c300bb",
+        "source_text": "Rasmalai (3). Desserts. Soft cooked cheese patties soaked in sweetened and flavored milk sauce. sweet, chilled."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0025",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Drinks",
+      "subcategory": "",
+      "item_name": "Mango Lassi",
+      "description": "Traditional Indian drink with mango and yogurt.",
+      "description_auto_generated": false,
+      "price": 2.49,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "150-250",
+      "allergens": [
+        "Dairy"
+      ],
+      "image": {
+        "filename": "mango_lassi.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/mango_lassi.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 25,
+      "tags": [
+        "cold",
+        "refreshing"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_96808b",
+        "source_text": "Mango Lassi. Drinks. Traditional Indian drink with mango and yogurt. cold, refreshing."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0026",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Soups",
+      "subcategory": "",
+      "item_name": "Spicehub Veg Soup",
+      "description": "Soup made with fresh crushed tomato paste and sour ingredients.",
+      "description_auto_generated": false,
+      "price": 5.99,
+      "currency": "USD",
+      "dietary_type": "Vegan",
+      "spice_level": "Mild",
+      "calorie_range": "100-200",
+      "allergens": [],
+      "image": {
+        "filename": "spicehub_veg_soup.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/spicehub_veg_soup.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 26,
+      "tags": [
+        "starter",
+        "tangy"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_b4371f",
+        "source_text": "Spicehub Veg Soup. Soups. Soup made with fresh crushed tomato paste and sour ingredients. starter, tangy."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:37Z",
+      "updated_at": "2026-09-24T02:10:37Z"
+    },
+    {
+      "item_id": "MENU-0027",
+      "tenant_id": "spicehub-kitchen-troy",
+      "category": "Soups",
+      "subcategory": "",
+      "item_name": "Sweet Corn Soup",
+      "description": "Soup made with sweet corn and starch.",
+      "description_auto_generated": false,
+      "price": 6.99,
+      "currency": "USD",
+      "dietary_type": "Veg",
+      "spice_level": "None",
+      "calorie_range": "150-250",
+      "allergens": [],
+      "image": {
+        "filename": "sweet_corn_soup.jpg",
+        "url": "/media/tenants/spicehub-kitchen-troy/menu/menu-v2/images/sweet_corn_soup.jpg",
+        "status": "approved"
+      },
+      "is_featured": false,
+      "is_available": true,
+      "sort_order": 27,
+      "tags": [
+        "starter",
+        "mild"
+      ],
+      "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "vector_id": "vec_41c233",
+        "source_text": "Sweet Corn Soup. Soups. Soup made with sweet corn and starch. starter, mild."
+      },
+      "voice": {
+        "audio_url": null,
+        "status": "not_generated"
+      },
+      "runtime_stats": {
+        "note": "Populated by the Analytics/Feedback blocks after launch, never by menu upload.",
+        "popularity_rank": null,
+        "like_percentage": null,
+        "review_count": 0
+      },
+      "menu_version": 2,
+      "created_at": "2026-09-24T02:10:38Z",
+      "updated_at": "2026-09-24T02:10:38Z"
+    }
+  ]
+}
