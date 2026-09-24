@@ -1,0 +1,1 @@
+"""SpiceHub Menu Ingestion prototype."""
